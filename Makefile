@@ -11,7 +11,6 @@ echo_server : echo_server.cpp server.h channel.h
 main : main.cpp
 	g++ -g -DASIO_STANDALONE -I../asio/asio/include -std=c++1y -o $@ $< -lpthread
 
-
 .PHONY: clean
 
 clean :
