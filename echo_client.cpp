@@ -10,9 +10,9 @@ int main() {
 
   asio::io_context context;
   client_connect(context, serverAddress).then([](channel c) {
-    c.send("Hello")
-     .then([c] { return c.send("world"); })
-     .then([c] { return c.send("!!!"); });
+    c.send("Hello\n")
+     .then([c] { return c.send("world\n"); })
+     .then([c] { return c.send("!!!\n"); });
   });
   context.run();
 }

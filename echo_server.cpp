@@ -6,7 +6,7 @@
 #include <iostream>
 
 static bbp::promise<> readAndLog(channel c) {
-  return c.readUntil('\0')
+  return c.readUntil('\n')
       .then([](const std::string &msg) {
         std::cout << msg << std::endl;
       })
