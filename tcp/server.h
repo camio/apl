@@ -1,13 +1,15 @@
 #ifndef SERVER_INCLUDED
 #define SERVER_INCLUDED
 
+#include <apl/tcp/channel.h>
 #include <asio/ts/internet.hpp>   // asio::ip::tcp
 #include <asio/ts/io_context.hpp> // asio::io_context
-#include <bbp/promise.h>
+#include <dpl/bbp/promise.h>
 #include <iostream>
 #include <stdexcept> // std::system_error
 
-#include "channel.h"
+namespace apl {
+namespace tcp {
 
 class server {
   std::shared_ptr<asio::ip::tcp::acceptor> d_acceptor;
@@ -17,8 +19,8 @@ public:
       : d_acceptor(std::make_shared<asio::ip::tcp::acceptor>(io_context,
                                                              listenEndpoint)) {}
 
-  bbp::promise<channel> listen() {
-    return bbp::promise<channel>([this](auto fulfill, auto reject) {
+  dpl::bbp::promise<channel> listen() {
+    return dpl::bbp::promise<channel>([this](auto fulfill, auto reject) {
       std::unique_ptr<asio::ip::tcp::socket> socket =
           std::make_unique<asio::ip::tcp::socket>(
               d_acceptor->get_executor().context());
@@ -39,5 +41,8 @@ public:
     });
   }
 };
+
+}
+}
 
 #endif
