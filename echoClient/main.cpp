@@ -1,7 +1,7 @@
 #include <apl/tcp/channel.h>
 #include <apl/tcp/client.h>
 #include <asio/ts/internet.hpp> // asio::tcp
-#include <dpl/bbp/promise.h>
+#include <dplbbp_promise.h>
 #include <iostream>
 
 int main() {

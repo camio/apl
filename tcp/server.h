@@ -4,7 +4,7 @@
 #include <apl/tcp/channel.h>
 #include <asio/ts/internet.hpp>   // asio::ip::tcp
 #include <asio/ts/io_context.hpp> // asio::io_context
-#include <dpl/bbp/promise.h>
+#include <dplbbp_promise.h>
 #include <iostream>
 #include <stdexcept> // std::system_error
 
@@ -19,8 +19,8 @@ public:
       : d_acceptor(std::make_shared<asio::ip::tcp::acceptor>(io_context,
                                                              listenEndpoint)) {}
 
-  dpl::bbp::promise<channel> listen() {
-    return dpl::bbp::promise<channel>([this](auto fulfill, auto reject) {
+  dplbbp::promise<channel> listen() {
+    return dplbbp::promise<channel>([this](auto fulfill, auto reject) {
       std::unique_ptr<asio::ip::tcp::socket> socket =
           std::make_unique<asio::ip::tcp::socket>(
               d_acceptor->get_executor().context());
