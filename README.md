@@ -11,6 +11,10 @@
 ## Building
 This library can be built with `make`. A checkout of the ASIO library is expected to be parallel to this repository.
 
+## Notes
+Note that I'm not using the `<asio/ts/netfwd.hpp>` header because it does not
+forward declare types within `tcp` such as `asio::ip::tcp::acceptor`.
+
 ## TODO
 - Reorganize
   apw/        (ASIO promise wrapper)
