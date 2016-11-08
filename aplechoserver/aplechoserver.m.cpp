@@ -1,10 +1,10 @@
-#include <apl/tcp/channel.h>
-#include <apl/tcp/server.h>
+#include <apltcp_channel.h>
+#include <apltcp_server.h>
 #include <asio/ts/internet.hpp> // asio::ip::tcp
 #include <dplbbp_promise.h>
 #include <iostream>
 
-static dplbbp::promise<> readAndLog(apl::tcp::channel c) {
+static dplbbp::promise<> readAndLog(apltcp::channel c) {
   return c.readUntil('\n')
       .then([](const std::string &msg) { std::cout << msg << std::endl; })
       .then([c] { return readAndLog(c); });
@@ -18,7 +18,7 @@ int main() {
     // TODO: i don't like that creating a server can throw an exception. See if
     // there's another way to create a tcp acceptor that produces an error code
     // which I can pass on to the 'listen()' calls.
-    apl::tcp::server s(context, listenAddress);
+    apltcp::server s(context, listenAddress);
     s.listen().then(readAndLog,
                     [](std::exception_ptr e) -> dplbbp::promise<> {
                       try {

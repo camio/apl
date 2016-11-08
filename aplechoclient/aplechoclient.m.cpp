@@ -1,5 +1,5 @@
-#include <apl/tcp/channel.h>
-#include <apl/tcp/client.h>
+#include <apltcp_channel.h>
+#include <apltcp_client.h>
 #include <asio/ts/internet.hpp> // asio::tcp
 #include <dplbbp_promise.h>
 #include <iostream>
@@ -8,8 +8,8 @@ int main() {
   const asio::ip::tcp::endpoint serverAddress(asio::ip::tcp::v4(), 8000);
 
   asio::io_context context;
-  apl::tcp::client_connect(context, serverAddress)
-      .then([](apl::tcp::channel c) {
+  apltcp::client_connect(context, serverAddress)
+      .then([](apltcp::channel c) {
         return c.send("Hello\n")
             .then([c] { return c.send("world\n"); })
             .then([c] { return c.send("!!!\n"); });

@@ -2,16 +2,16 @@ cmake_minimum_required(VERSION 3.6)
 
 project(apl)
 
-if(NOT TARGET apl_echoClient)
-  add_subdirectory(../apl/echoClient ${CMAKE_BINARY_DIR}/apl/echoClient)
+if(NOT TARGET aplechoclient)
+  add_subdirectory(aplechoclient ${CMAKE_BINARY_DIR}/apl/aplechoclient)
 endif()
 
-if(NOT TARGET apl_echoServer)
-  add_subdirectory(../apl/echoServer ${CMAKE_BINARY_DIR}/apl/echoServer)
+if(NOT TARGET aplechoserver)
+  add_subdirectory(aplechoserver ${CMAKE_BINARY_DIR}/apl/aplechoserver)
 endif()
 
-if(NOT TARGET apl_tcp)
-  add_subdirectory(../apl/tcp ${CMAKE_BINARY_DIR}/apl/echoServer)
+if(NOT TARGET apltcp)
+  add_subdirectory(apltcp ${CMAKE_BINARY_DIR}/apl/aplechoserver)
 endif()
 
-add_custom_target(apl DEPENDS apl_echoClient apl_echoServer apl_tcp)
+add_custom_target(apl DEPENDS aplechoclient aplechoserver apltcp)

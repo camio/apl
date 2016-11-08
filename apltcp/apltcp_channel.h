@@ -8,8 +8,7 @@
 #include <string>
 #include <utility> // std::shared_ptr
 
-namespace apl {
-namespace tcp {
+namespace apltcp {
 
 // This class implements a mechanism whereby strings can be sent and read from
 // an open TCP connection.
@@ -74,7 +73,6 @@ public:
   }
 };
 
-}
 }
 
 #endif

@@ -1,15 +1,14 @@
 #ifndef SERVER_INCLUDED
 #define SERVER_INCLUDED
 
-#include <apl/tcp/channel.h>
+#include <apltcp_channel.h>
 #include <asio/ts/internet.hpp>   // asio::ip::tcp
 #include <asio/ts/io_context.hpp> // asio::io_context
 #include <dplbbp_promise.h>
 #include <iostream>
 #include <stdexcept> // std::system_error
 
-namespace apl {
-namespace tcp {
+namespace apltcp {
 
 class server {
   std::shared_ptr<asio::ip::tcp::acceptor> d_acceptor;
@@ -19,8 +18,8 @@ public:
       : d_acceptor(std::make_shared<asio::ip::tcp::acceptor>(io_context,
                                                              listenEndpoint)) {}
 
-  dplbbp::promise<channel> listen() {
-    return dplbbp::promise<channel>([this](auto fulfill, auto reject) {
+  dplbbp::promise<apltcp::channel> listen() {
+    return dplbbp::promise<apltcp::channel>([this](auto fulfill, auto reject) {
       std::unique_ptr<asio::ip::tcp::socket> socket =
           std::make_unique<asio::ip::tcp::socket>(
               d_acceptor->get_executor().context());
@@ -28,7 +27,7 @@ public:
         acceptor = d_acceptor, socket = std::move(socket), fulfill, reject
       ](std::error_code ec) {
         if (!ec) {
-          fulfill(channel(std::move(*socket)));
+          fulfill(apltcp::channel(std::move(*socket)));
         } else {
           std::cout << "Error on async_accept" << std::endl;
           try {
@@ -42,7 +41,6 @@ public:
   }
 };
 
-}
 }
 
 #endif
