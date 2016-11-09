@@ -13,11 +13,16 @@ server::server(asio::io_context &io_context,
 
 dplbbp::promise<apltcp::channel> server::listen() {
   return dplbbp::promise<apltcp::channel>([this](auto fulfill, auto reject) {
-    std::unique_ptr<asio::ip::tcp::socket> socket =
+    std::unique_ptr<asio::ip::tcp::socket> socket_up =
         std::make_unique<asio::ip::tcp::socket>(
             d_acceptor->get_executor().context());
-    d_acceptor->async_accept(*socket, [
-      acceptor = d_acceptor, socket = std::move(socket), fulfill, reject
+    // Note that we need to extract the pointer in `socket_up` before we make
+    // the `async_accept` call because `socket_up` is modified by the
+    // `std::move` call in the capture. Evaluation order of the argument
+    // expressions is unspecified.
+    asio::ip::tcp::socket *const socket_p = socket_up.get();
+    d_acceptor->async_accept(*socket_p, [
+      acceptor = d_acceptor, socket = std::move(socket_up), fulfill, reject
     ](std::error_code ec) {
       if (!ec) {
         fulfill(apltcp::channel(std::move(*socket)));
