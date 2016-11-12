@@ -5,7 +5,7 @@
 #include <asio/ts/io_context.hpp> // asio::io_context
 #include <memory>                 // std::shared_ptr
 
-namespace dplbbp {
+namespace dplp {
 template <typename... Types> class promise;
 }
 
@@ -19,7 +19,7 @@ class server {
 public:
   server(asio::io_context &io_context, asio::ip::tcp::endpoint listenEndpoint);
 
-  dplbbp::promise<apltcp::channel> listen();
+  dplp::promise<apltcp::channel> listen();
 };
 }
 

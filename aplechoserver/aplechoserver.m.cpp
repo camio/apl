@@ -1,10 +1,10 @@
 #include <apltcp_channel.h>
 #include <apltcp_server.h>
 #include <asio/ts/internet.hpp> // asio::ip::tcp
-#include <dplbbp_promise.h>
+#include <dplp_promise.h>
 #include <iostream>
 
-static dplbbp::promise<> readAndLog(apltcp::channel c) {
+static dplp::promise<> readAndLog(apltcp::channel c) {
   return c.readUntil('\n')
       .then([](const std::string &msg) { std::cout << msg << std::endl; })
       .then([c] { return readAndLog(c); });
@@ -20,7 +20,7 @@ int main() {
     // which I can pass on to the 'listen()' calls.
     apltcp::server s(context, listenAddress);
     s.listen().then(readAndLog,
-                    [](std::exception_ptr e) -> dplbbp::promise<> {
+                    [](std::exception_ptr e) -> dplp::promise<> {
                       try {
                         std::rethrow_exception(e);
                       } catch (std::system_error &e) {

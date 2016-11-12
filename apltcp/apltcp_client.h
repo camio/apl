@@ -4,14 +4,14 @@
 #include <asio/ts/internet.hpp>   // asio::tcp
 #include <asio/ts/io_context.hpp> // asio::io_context
 
-namespace dplbbp {
+namespace dplp {
 template <typename... Types> class promise;
 }
 
 namespace apltcp {
 class channel;
 
-dplbbp::promise<apltcp::channel>
+dplp::promise<apltcp::channel>
 client_connect(asio::io_context &io_context,
                const asio::ip::tcp::endpoint &serverAddress);
 }

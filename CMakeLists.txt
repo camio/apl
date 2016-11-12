@@ -14,4 +14,8 @@ if(NOT TARGET apltcp)
   add_subdirectory(apltcp ${CMAKE_BINARY_DIR}/apl/aplechoserver)
 endif()
 
-add_custom_target(apl DEPENDS aplechoclient aplechoserver apltcp)
+add_custom_target(apl DEPENDS
+  aplechoclient
+  aplechoserver
+  apltcp
+)
