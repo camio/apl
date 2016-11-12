@@ -1,5 +1,5 @@
-#ifndef CHANNEL_INCLUDED
-#define CHANNEL_INCLUDED
+#ifndef APLTCP_CHANNEL_INCLUDED
+#define APLTCP_CHANNEL_INCLUDED
 
 #include <asio/ts/buffer.hpp>   // asio::dynamic, asio::read_until
 #include <asio/ts/internet.hpp> // asio::tcp::endpoint, asio::ip::tcp::socket

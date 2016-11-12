@@ -1,5 +1,5 @@
-#ifndef CLIENT_INCLUDED
-#define CLIENT_INCLUDED
+#ifndef APLTCP_CLIENT_INCLUDED
+#define APLTCP_CLIENT_INCLUDED
 
 #include <asio/ts/internet.hpp>   // asio::tcp
 #include <asio/ts/io_context.hpp> // asio::io_context
