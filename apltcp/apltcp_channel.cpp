@@ -7,8 +7,8 @@ channel::channel(asio::ip::tcp::socket socket)
     : d_socket(std::make_shared<asio::ip::tcp::socket>(std::move(socket))),
       d_read_buffer(std::make_shared<std::string>()) {}
 
-dplp::promise<> channel::send(std::string msg) const {
-  return dplp::promise<>([&msg, this](auto fulfill, auto reject) {
+dplp::Promise<> channel::send(std::string msg) const {
+  return dplp::Promise<>([&msg, this](auto fulfill, auto reject) {
     const std::shared_ptr<std::string> write_buffer =
         std::make_shared<std::string>(std::move(msg));
     asio::async_write(*d_socket, asio::buffer(*write_buffer),
@@ -27,8 +27,8 @@ dplp::promise<> channel::send(std::string msg) const {
   });
 }
 
-dplp::promise<std::string> channel::readUntil(char delim) const {
-  return dplp::promise<std::string>(
+dplp::Promise<std::string> channel::readUntil(char delim) const {
+  return dplp::Promise<std::string>(
       [ delim, socket = d_socket, read_buffer = d_read_buffer ](auto fulfill,
                                                                 auto reject) {
         asio::async_read_until(

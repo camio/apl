@@ -7,7 +7,7 @@
 #include <utility> // std::shared_ptr
 
 namespace dplp {
-template <typename... Types> class promise;
+template <typename... Types> class Promise;
 }
 
 namespace apltcp {
@@ -25,13 +25,13 @@ public:
   // Send the specified 'msg' over the TCP connection followed by the '\0'
   // character. Return a promise that is fulfilled when the operation is
   // complete or rejected with a 'std::error_code' when the operation fails.
-  dplp::promise<> send(std::string msg) const;
+  dplp::Promise<> send(std::string msg) const;
 
   // Read bytes from the TCP connection until the specified 'delim' delimiter
   // character is reached. Return a promise that is fulfilled with the
   // characters read, not including the delimiter, when the operation is
   // complete or rejected with a 'std::error_code' when the operation fails.
-  dplp::promise<std::string> readUntil(char delim) const;
+  dplp::Promise<std::string> readUntil(char delim) const;
 };
 
 }

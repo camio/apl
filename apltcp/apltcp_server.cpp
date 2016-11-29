@@ -11,8 +11,8 @@ server::server(asio::io_context &io_context,
     : d_acceptor(std::make_shared<asio::ip::tcp::acceptor>(io_context,
                                                            listenEndpoint)) {}
 
-dplp::promise<apltcp::channel> server::listen() {
-  return dplp::promise<apltcp::channel>([this](auto fulfill, auto reject) {
+dplp::Promise<apltcp::channel> server::listen() {
+  return dplp::Promise<apltcp::channel>([this](auto fulfill, auto reject) {
     std::unique_ptr<asio::ip::tcp::socket> socket_up =
         std::make_unique<asio::ip::tcp::socket>(
             d_acceptor->get_executor().context());

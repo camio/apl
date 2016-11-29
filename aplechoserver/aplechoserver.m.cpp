@@ -4,7 +4,7 @@
 #include <dplp_promise.h>
 #include <iostream>
 
-static dplp::promise<> readAndLog(apltcp::channel c) {
+static dplp::Promise<> readAndLog(apltcp::channel c) {
   return c.readUntil('\n')
       .then([](const std::string &msg) { std::cout << msg << std::endl; })
       .then([c] { return readAndLog(c); });
@@ -20,7 +20,7 @@ int main() {
     // which I can pass on to the 'listen()' calls.
     apltcp::server s(context, listenAddress);
     s.listen().then(readAndLog,
-                    [](std::exception_ptr e) -> dplp::promise<> {
+                    [](std::exception_ptr e) -> dplp::Promise<> {
                       try {
                         std::rethrow_exception(e);
                       } catch (std::system_error &e) {

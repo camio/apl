@@ -7,12 +7,12 @@
 
 namespace apltcp {
 
-dplp::promise<apltcp::channel>
+dplp::Promise<apltcp::channel>
 client_connect(asio::io_context &io_context,
                const asio::ip::tcp::endpoint &serverAddress) {
   const std::shared_ptr<asio::ip::tcp::socket> socket(
       std::make_shared<asio::ip::tcp::socket>(io_context));
-  return dplp::promise<apltcp::channel>([&](auto fulfill, auto reject) {
+  return dplp::Promise<apltcp::channel>([&](auto fulfill, auto reject) {
     asio::async_connect(
         *socket, std::vector<asio::ip::tcp::endpoint>{serverAddress},
         [fulfill, reject, socket](const asio::error_code &ec,

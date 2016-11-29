@@ -6,7 +6,7 @@
 #include <memory>                 // std::shared_ptr
 
 namespace dplp {
-template <typename... Types> class promise;
+template <typename... Types> class Promise;
 }
 
 namespace apltcp {
@@ -19,7 +19,7 @@ class server {
 public:
   server(asio::io_context &io_context, asio::ip::tcp::endpoint listenEndpoint);
 
-  dplp::promise<apltcp::channel> listen();
+  dplp::Promise<apltcp::channel> listen();
 };
 }
 
