@@ -12,4 +12,4 @@ endif()
 find_package(ASIO REQUIRED)
 
 add_executable(aplechoserver aplechoserver.m.cpp)
-target_link_libraries(aplechoserver apltcp asio dplp)
+target_link_libraries(aplechoserver apltcp ASIO::ASIO dplp)

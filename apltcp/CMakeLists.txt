@@ -16,4 +16,4 @@ add_library(apltcp
   apltcp_server.cpp
 )
 target_include_directories(apltcp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(apltcp asio dplp)
+target_link_libraries(apltcp ASIO::ASIO dplp)
