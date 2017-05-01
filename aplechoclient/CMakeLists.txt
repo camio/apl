@@ -1,15 +1,7 @@
 cmake_minimum_required(VERSION 3.6)
 project(aplechoclient)
 
-if(NOT TARGET apltcp)
-  add_subdirectory(../apltcp ${CMAKE_BINARY_DIR}/apl/tcp)
-endif()
-
-if(NOT TARGET dplp)
-  add_subdirectory(../../dpl/dplp ${CMAKE_BINARY_DIR}/dpl/dplp)
-endif()
-
-find_package(ASIO REQUIRED)
+cmsi_importp(apltcp)
 
 add_executable(aplechoclient aplechoclient.m.cpp)
 target_link_libraries(aplechoclient apltcp ASIO::ASIO dplp)

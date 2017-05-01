@@ -1,12 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 project(apltcp)
 
-if(NOT TARGET dplp)
-  add_subdirectory(../../dpl/dplp ${CMAKE_BINARY_DIR}/dpl/dplp)
-endif()
-
-find_package(ASIO REQUIRED)
-
 add_library(apltcp
   apltcp_channel.h
   apltcp_channel.cpp
