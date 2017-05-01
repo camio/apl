@@ -27,11 +27,7 @@ dplp::Promise<apltcp::channel> server::listen() {
       if (!ec) {
         fulfill(apltcp::channel(std::move(*socket)));
       } else {
-        try {
-          throw std::system_error(ec);
-        } catch (...) {
-          reject(std::current_exception());
-        }
+        reject(std::make_exception_ptr(std::system_error(ec)));
       }
     });
   });

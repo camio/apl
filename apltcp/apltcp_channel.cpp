@@ -17,11 +17,7 @@ dplp::Promise<> channel::send(std::string msg) const {
                         if (!ec) {
                           fulfill();
                         } else {
-                          try {
-                            throw std::system_error(ec);
-                          } catch (...) {
-                            reject(std::current_exception());
-                          }
+                          reject(std::make_exception_ptr(std::system_error(ec)));
                         }
                       });
   });
@@ -40,11 +36,7 @@ dplp::Promise<std::string> channel::readUntil(char delim) const {
                 read_buffer->erase(0, length);
                 fulfill(std::move(dataPiece));
               } else {
-                try {
-                  throw std::system_error(ec);
-                } catch (...) {
-                  reject(std::current_exception());
-                }
+                reject(std::make_exception_ptr(std::system_error(ec)));
               }
             });
       });
