@@ -26,6 +26,7 @@ int main() {
                       } catch (std::system_error &e) {
                         std::cout << "Then Error: " << e.what() << std::endl;
                       }
+                      return dplp::makeFulfilledPromise<>();
                     });
   } catch (std::system_error &e) {
     std::cout << "Server Creation Error: " << e.what() << std::endl;
